@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Report Item - Campus Finder</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f6f9; }
+        .form-card { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        label { display: block; margin-top: 10px; font-weight: bold; }
+        input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
+        button { margin-top: 20px; width: 100%; padding: 10px; background-color: #2ecc71; color: white; border: none; font-size: 16px; border-radius: 4px; cursor: pointer; }
+    </style>
+</head>
+<body>
+
+<div class="form-card">
+    <h2>Report Lost or Found Item</h2>
+    
+    <form action="ReportItemServlet" method="POST">
+        <label for="status">Report Type:</label>
+        <select id="status" name="item_status" required>
+            <option value="LOST">Lost Item</option>
+            <option value="FOUND">Found Item</option>
+        </select>
+
+        <label for="itemName">Item Name:</label>
+        <input type="text" id="itemName" name="item_name" placeholder="e.g. Black Wallet" required>
+
+        <label for="category">Category:</label>
+        <select id="category" name="category_id" required>
+            <option value="101">Electronics</option>
+            <option value="102">Documents</option>
+            <option value="103">Accessories</option>
+            <option value="104">Books</option>
+            <option value="105">Keys</option>
+        </select>
+
+        <label for="location">Location:</label>
+        <select id="location" name="location_id" required>
+            <option value="201">Library</option>
+            <option value="202">Canteen</option>
+            <option value="203">Main Block</option>
+            <option value="204">Parking Area</option>
+        </select>
+
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" rows="4" placeholder="Provide extra details..."></textarea>
+
+        <button type="submit">Submit Report</button>
+    </form>
+</div>
+
+</body>
+</html>
