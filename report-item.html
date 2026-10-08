@@ -2,53 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Report Item - Campus Finder</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f6f9; }
-        .form-card { max-width: 500px; margin: 0 auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        label { display: block; margin-top: 10px; font-weight: bold; }
-        input, select, textarea { width: 100%; padding: 8px; margin-top: 5px; box-sizing: border-box; }
-        button { margin-top: 20px; width: 100%; padding: 10px; background-color: #2ecc71; color: white; border: none; font-size: 16px; border-radius: 4px; cursor: pointer; }
-    </style>
+    <meta name="description" content="Report a lost or found item on campus.">
+    <meta name="theme-color" content="#f3ede0">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M9 2h10l5 5v19H4V7z' fill='%23ebd8a0' stroke='%231b1a17' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='9' r='2.2' fill='%23f3ede0' stroke='%231b1a17' stroke-width='1.8'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body data-page="report">
+    <a class="skip-link" href="#main">Skip to content</a>
 
-<div class="form-card">
-    <h2>Report Lost or Found Item</h2>
-    
-    <form action="ReportItemServlet" method="POST">
-        <label for="status">Report Type:</label>
-        <select id="status" name="item_status" required>
-            <option value="LOST">Lost Item</option>
-            <option value="FOUND">Found Item</option>
-        </select>
+    <header class="masthead">
+        <div class="wrap bar">
+            <a class="brand" href="home.html">
+                <svg class="glyph" viewBox="0 0 28 28" aria-hidden="true"><path class="t" d="M9 2h10l5 5v19H4V7z"/><circle class="h" cx="14" cy="9" r="2.2"/></svg>
+                Campus Finder
+            </a>
+            <nav class="nav" aria-label="Main">
+                <a href="home.html">Home</a>
+                <a href="report-item.html" aria-current="page">Report</a>
+                <a href="search.html">Search</a>
+                <a href="my-claims.html">My claims</a>
+                <a href="matches.html">Matches</a>
+            </nav>
+            <div class="who" data-who></div>
+        </div>
+    </header>
 
-        <label for="itemName">Item Name:</label>
-        <input type="text" id="itemName" name="item_name" placeholder="e.g. Black Wallet" required>
+    <main id="main" class="page">
+        <div class="wrap">
+            <p class="notice" id="demo-note" hidden>Demo mode &middot; reports are saved in this browser only</p>
 
-        <label for="category">Category:</label>
-        <select id="category" name="category_id" required>
-            <option value="101">Electronics</option>
-            <option value="102">Documents</option>
-            <option value="103">Accessories</option>
-            <option value="104">Books</option>
-            <option value="105">Keys</option>
-        </select>
+            <div class="page-head">
+                <p class="kicker">Report</p>
+                <h1>Report lost or found item</h1>
+                <p class="lead">Tell us what happened. The more detail you add, the easier it is to match your report with the right item.</p>
+            </div>
 
-        <label for="location">Location:</label>
-        <select id="location" name="location_id" required>
-            <option value="201">Library</option>
-            <option value="202">Canteen</option>
-            <option value="203">Main Block</option>
-            <option value="204">Parking Area</option>
-        </select>
+            <div class="layout">
+                <section class="sheet" aria-label="Item report form">
+                    <form class="form" id="report-form" action="ReportItemServlet" method="POST">
+                        <fieldset class="field">
+                            <legend>Report type</legend>
+                            <div class="toggle">
+                                <input type="radio" id="type-lost" name="item_status" value="LOST" checked>
+                                <label for="type-lost">Lost<span>I lost something</span></label>
+                                <input type="radio" id="type-found" name="item_status" value="FOUND">
+                                <label for="type-found">Found<span>I found something</span></label>
+                            </div>
+                        </fieldset>
 
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" rows="4" placeholder="Provide extra details..."></textarea>
+                        <div class="field-row wide-first">
+                            <div class="field">
+                                <label for="itemName">Item name</label>
+                                <input type="text" id="itemName" name="item_name" placeholder="e.g. Black Wallet" autocomplete="off" required>
+                                <p class="hint">Use the plain name someone would search for.</p>
+                            </div>
+                            <div class="field">
+                                <label for="reportedDate" id="date-label">Date lost</label>
+                                <input type="date" id="reportedDate" name="reported_date" required>
+                            </div>
+                        </div>
 
-        <button type="submit">Submit Report</button>
-    </form>
-</div>
+                        <div class="field-row">
+                            <div class="field">
+                                <label for="category">Category</label>
+                                <select id="category" name="category_id" required>
+                                    <option value="" selected disabled>Select a category</option>
+                                    <option value="101">Electronics</option>
+                                    <option value="102">Documents</option>
+                                    <option value="103">Accessories</option>
+                                    <option value="104">Books</option>
+                                    <option value="105">Keys</option>
+                                </select>
+                            </div>
+                            <div class="field">
+                                <label for="location" id="location-label">Location</label>
+                                <select id="location" name="location_id" required>
+                                    <option value="" selected disabled>Select a location</option>
+                                    <option value="201">Library</option>
+                                    <option value="202">Canteen</option>
+                                    <option value="203">Main Block</option>
+                                    <option value="204">Parking Area</option>
+                                </select>
+                            </div>
+                        </div>
 
+                        <div class="field">
+                            <label for="description">Description <span class="optional">(optional)</span></label>
+                            <textarea id="description" name="description" rows="4" placeholder="Provide extra details..."></textarea>
+                            <p class="hint">Brand, colour, size, stickers or marks. Mention the item by name &mdash; descriptions are compared with item names when looking for matches.</p>
+                        </div>
+
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-ink" id="submit-btn"><span class="btn-label">Submit Report</span></button>
+                            <a class="btn btn-line" href="home.html">Cancel</a>
+                        </div>
+                    </form>
+
+                    <div class="saved" id="saved" tabindex="-1" hidden>
+                        <p class="kicker">Saved</p>
+                        <h2>Your report is in</h2>
+                        <dl class="facts" id="saved-facts"></dl>
+                        <div class="form-actions">
+                            <a class="btn btn-ink" id="saved-primary" href="matches.html">See possible matches</a>
+                            <a class="btn btn-line" href="search.html">Search items</a>
+                            <button type="button" class="btn btn-line" id="saved-again">Report another</button>
+                        </div>
+                    </div>
+                </section>
+
+                <aside class="board" aria-labelledby="tips-title">
+                    <h2 id="tips-title">Before you submit</h2>
+                    <ul>
+                        <li><strong>Be specific.</strong> &ldquo;Black leather wallet&rdquo; matches better than &ldquo;wallet&rdquo;.</li>
+                        <li><strong>Check the date.</strong> Reports within 3 days of each other score higher as a match.</li>
+                        <li><strong>Pick the right place.</strong> A matching category and location add the most points.</li>
+                        <li><strong>Keep private details out.</strong> Leave out ID or card numbers.</li>
+                    </ul>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap">
+            <span>Campus Finder &middot; DBMS course project</span>
+            <button type="button" id="reset-demo">Reset sample data</button>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/match.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

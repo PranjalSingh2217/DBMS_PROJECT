@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Possible Matches - Campus Finder</title>
+    <meta name="description" content="Lost reports paired with the found reports that look most alike, scored out of 100.">
+    <meta name="theme-color" content="#f3ede0">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M9 2h10l5 5v19H4V7z' fill='%23ebd8a0' stroke='%231b1a17' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='9' r='2.2' fill='%23f3ede0' stroke='%231b1a17' stroke-width='1.8'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="matches">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+        <div class="wrap bar">
+            <a class="brand" href="home.html">
+                <svg class="glyph" viewBox="0 0 28 28" aria-hidden="true"><path class="t" d="M9 2h10l5 5v19H4V7z"/><circle class="h" cx="14" cy="9" r="2.2"/></svg>
+                Campus Finder
+            </a>
+            <nav class="nav" aria-label="Main">
+                <a href="home.html">Home</a>
+                <a href="report-item.html">Report</a>
+                <a href="search.html">Search</a>
+                <a href="my-claims.html">My claims</a>
+                <a href="matches.html" aria-current="page">Matches</a>
+            </nav>
+            <div class="who" data-who></div>
+        </div>
+    </header>
+
+    <main id="main" class="page">
+        <div class="wrap">
+            <p class="notice">Sample data &middot; connect the servlet to score live reports</p>
+
+            <div class="page-head">
+                <p class="kicker">Possible matches</p>
+                <h1>Lost meets found</h1>
+                <p class="lead">Every lost report is scored against every found report: category +30, location +30, within 3 days +20, name in the description +20.</p>
+            </div>
+
+            <form class="controls" aria-label="Match filters">
+                <div class="field">
+                    <label for="m-scope">Show</label>
+                    <select id="m-scope">
+                        <option value="all">Every lost report</option>
+                        <option value="mine">Only my lost reports</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="m-min">Minimum score</label>
+                    <select id="m-min">
+                        <option value="0">Any score</option>
+                        <option value="30">30 or more</option>
+                        <option value="50">50 or more</option>
+                        <option value="60" selected>60 or more</option>
+                        <option value="80">80 or more</option>
+                    </select>
+                </div>
+            </form>
+
+            <p class="count" id="count" role="status" aria-live="polite"></p>
+            <ul class="slips" id="slips"></ul>
+            <noscript><p class="empty">This page needs JavaScript to score the sample reports.</p></noscript>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap">
+            <span>Campus Finder &middot; DBMS course project</span>
+            <button type="button" id="reset-demo">Reset sample data</button>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/match.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

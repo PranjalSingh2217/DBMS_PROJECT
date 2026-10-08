@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Claims - Campus Finder</title>
+    <meta name="description" content="Track the claims you made on found items.">
+    <meta name="theme-color" content="#f3ede0">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M9 2h10l5 5v19H4V7z' fill='%23ebd8a0' stroke='%231b1a17' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='9' r='2.2' fill='%23f3ede0' stroke='%231b1a17' stroke-width='1.8'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="claims">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+        <div class="wrap bar">
+            <a class="brand" href="home.html">
+                <svg class="glyph" viewBox="0 0 28 28" aria-hidden="true"><path class="t" d="M9 2h10l5 5v19H4V7z"/><circle class="h" cx="14" cy="9" r="2.2"/></svg>
+                Campus Finder
+            </a>
+            <nav class="nav" aria-label="Main">
+                <a href="home.html">Home</a>
+                <a href="report-item.html">Report</a>
+                <a href="search.html">Search</a>
+                <a href="my-claims.html" aria-current="page">My claims</a>
+                <a href="matches.html">Matches</a>
+            </nav>
+            <div class="who" data-who></div>
+        </div>
+    </header>
+
+    <main id="main" class="page">
+        <div class="wrap">
+            <p class="notice">Sample data &middot; connect the servlet to list live claims</p>
+
+            <div class="page-head">
+                <p class="kicker">My claims</p>
+                <h1>Claims by <span id="claims-who"></span></h1>
+                <p class="lead">Each claim starts as pending. Staff compare it with the item, then approve or reject it.</p>
+            </div>
+
+            <div class="stats" aria-label="Claims by status">
+                <div class="stat"><b id="stat-pending">0</b><span>Pending</span></div>
+                <div class="stat"><b id="stat-approved">0</b><span>Approved</span></div>
+                <div class="stat"><b id="stat-rejected">0</b><span>Rejected</span></div>
+            </div>
+
+            <table class="ledger" id="claims-table">
+                <thead>
+                    <tr>
+                        <th scope="col">Item</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Location</th>
+                        <th scope="col">Claimed on</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody id="claims-body"></tbody>
+            </table>
+
+            <div class="empty" id="claims-empty" hidden>
+                <strong>No claims yet</strong>
+                <p>When you recognise something in the found reports, claim it from the search page and it will be tracked here.</p>
+                <a class="btn btn-ink" href="search.html">Search found items</a>
+            </div>
+            <noscript><p class="empty">This page needs JavaScript to list the sample claims.</p></noscript>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="wrap">
+            <span>Campus Finder &middot; DBMS course project</span>
+            <button type="button" id="reset-demo">Reset sample data</button>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/match.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

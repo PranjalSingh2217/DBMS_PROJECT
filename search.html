@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Items - Campus Finder</title>
+    <meta name="description" content="Search every lost and found report by category, location or status.">
+    <meta name="theme-color" content="#f3ede0">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M9 2h10l5 5v19H4V7z' fill='%23ebd8a0' stroke='%231b1a17' stroke-width='2' stroke-linejoin='round'/%3E%3Ccircle cx='14' cy='9' r='2.2' fill='%23f3ede0' stroke='%231b1a17' stroke-width='1.8'/%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body data-page="search">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <header class="masthead">
+        <div class="wrap bar">
+            <a class="brand" href="home.html">
+                <svg class="glyph" viewBox="0 0 28 28" aria-hidden="true"><path class="t" d="M9 2h10l5 5v19H4V7z"/><circle class="h" cx="14" cy="9" r="2.2"/></svg>
+                Campus Finder
+            </a>
+            <nav class="nav" aria-label="Main">
+                <a href="home.html">Home</a>
+                <a href="report-item.html">Report</a>
+                <a href="search.html" aria-current="page">Search</a>
+                <a href="my-claims.html">My claims</a>
+                <a href="matches.html">Matches</a>
+            </nav>
+            <div class="who" data-who></div>
+        </div>
+    </header>
+
+    <main id="main" class="page">
+        <div class="wrap">
+            <p class="notice">Sample data &middot; connect the servlet to list live reports</p>
+
+            <div class="page-head">
+                <p class="kicker">Search</p>
+                <h1>Find an item</h1>
+                <p class="lead">Every lost and found report in one place. Narrow it down by status, category or location, and claim anything you recognise.</p>
+            </div>
+
+            <form class="filters" id="filters" aria-label="Filter items">
+                <div class="field">
+                    <label for="f-status">Status</label>
+                    <select id="f-status">
+                        <option value="">Lost or found</option>
+                        <option value="LOST">Lost</option>
+                        <option value="FOUND">Found</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label for="f-category">Category</label>
+                    <select id="f-category"><option value="">Any category</option></select>
+                </div>
+                <div class="field">
+                    <label for="f-location">Location</label>
+                    <select id="f-location"><option value="">Any location</option></select>
+                </div>
+                <button type="reset" class="btn btn-line">Clear</button>
+            </form>
+
+            <p class="count" id="count" role="status" aria-live="polite"></p>
+            <ul class="tickets" id="results"></ul>
+            <noscript><p class="empty">This page needs JavaScript to list the sample reports.</p></noscript>
+        </div>
+    </main>
+
+    <dialog id="claim-dialog" aria-labelledby="claim-title">
+        <form class="dlg" id="claim-form">
+            <div>
+                <h2 id="claim-title">Claim this item</h2>
+                <p class="sub" id="claim-sub"></p>
+            </div>
+            <div class="field">
+                <label for="claim-text">How can you show it is yours?</label>
+                <textarea id="claim-text" rows="4" required placeholder="Marks, contents, colour, where you lost it..."></textarea>
+                <p class="hint">Staff compare this with the item before they approve the claim.</p>
+            </div>
+            <div class="actions">
+                <button type="button" class="btn btn-line" id="claim-cancel">Cancel</button>
+                <button type="submit" class="btn btn-ink">Send claim</button>
+            </div>
+        </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+    <footer class="footer">
+        <div class="wrap">
+            <span>Campus Finder &middot; DBMS course project</span>
+            <button type="button" id="reset-demo">Reset sample data</button>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/match.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
